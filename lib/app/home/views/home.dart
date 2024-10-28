@@ -1,5 +1,15 @@
-import 'package:commision_system/%20%20%20%20DashboardPage.dart';
 import 'package:flutter/material.dart';
+
+void main() => runApp(AdminDashboardApp());
+
+class AdminDashboardApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AdminDashboard(),
+    );
+  }
+}
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -11,7 +21,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   bool isExpanded = true;
 
   final List<Widget> _pages = [
-    DashboardPage(),
+    Center(child: Text("Dashboard")),
     Center(child: Text("Financial Data")),
     Center(child: Text("Transactions")),
     Center(child: Text("Reports")),
@@ -24,20 +34,19 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
     return Scaffold(
       appBar: isMobile ? AppBar() : null,
-      drawer: isMobile ? _buildDrawer() : null, // Drawer for mobile
+      drawer: isMobile ? _buildDrawer() : null,
       body: Stack(
         children: [
           Row(
             children: [
               if (!isMobile) _buildSidebar(),
-              Expanded(child: _pages[_selectedIndex]), // Main content area
+              Expanded(child: _pages[_selectedIndex]),
             ],
           ),
-          // Toggle button for expanding/collapsing sidebar
           if (!isMobile)
             Positioned(
               top: 10,
-              left: isExpanded ? 230 : 84, // Adjusts based on sidebar width
+              left: isExpanded ? 230 : 84,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
@@ -50,10 +59,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2), // Shadow color
-                        offset: Offset(4, 0), // Shadow position
-                        blurRadius: 8, // Blur effect
-                        spreadRadius: 2, // Spread effect
+                        color: Colors.black.withOpacity(0.2),
+                        offset: Offset(4, 0),
+                        blurRadius: 8,
+                        spreadRadius: 2,
                       ),
                     ],
                     color: Colors.white,
@@ -74,14 +83,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  // Build sidebar for desktop layout
   Widget _buildSidebar() {
     return Container(
       width: isExpanded ? 250 : 100,
       color: Colors.black87,
       child: Column(
         children: [
-          // Header with logo and name
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
@@ -104,25 +111,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
           ),
           Divider(color: Colors.grey.shade700),
-
-          // NavigationRail for main items
           Expanded(
-            child: NavigationRail(
-              selectedLabelTextStyle: TextStyle(color: Colors.white),
-              unselectedLabelTextStyle: TextStyle(color: Colors.black),
-              elevation: 2,
-              backgroundColor: Colors.pink.shade500,
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (int index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              extended: isExpanded,
-              destinations: [
+            child: ListView(
+              children: [
                 _buildNavigationRailDestination(
-                  icon: Icons.home,
-                  label: 'Home',
+                  icon: Icons.dashboard,
+                  label: 'Dashboard',
                   index: 0,
                 ),
                 _buildNavigationRailDestination(
@@ -130,10 +124,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   label: 'Financial Data',
                   index: 1,
                 ),
-                _buildNavigationRailDestination(
-                  icon: Icons.swap_horiz,
-                  label: 'Transactions',
-                  index: 2,
+                NavigationRailDropdown(
+                  onItemSelected: (int pageIndex) {
+                    setState(() {
+                      _selectedIndex = pageIndex;
+                    });
+                  },
                 ),
                 _buildNavigationRailDestination(
                   icon: Icons.report,
@@ -153,34 +149,36 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  // Build a custom NavigationRailDestination
-  NavigationRailDestination _buildNavigationRailDestination({
+  Widget _buildNavigationRailDestination({
     required IconData icon,
     required String label,
     required int index,
   }) {
     final isSelected = _selectedIndex == index;
 
-    return NavigationRailDestination(
-      icon: Icon(icon, color: isSelected ? Colors.blue : Colors.white),
-      label: isExpanded
+    return ListTile(
+      leading: Icon(icon, color: isSelected ? Colors.blue : Colors.white),
+      title: isExpanded
           ? Text(
               label,
               style: TextStyle(color: isSelected ? Colors.blue : Colors.white),
             )
-          : SizedBox(),
+          : null,
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
     );
   }
 
-  // Build the drawer for mobile devices
   Widget _buildDrawer() {
     return Drawer(
       child: Column(
         children: [
-          // Header
           Container(
             padding: EdgeInsets.all(16.0),
-            child: const Row(
+            child: Row(
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.blue,
@@ -196,8 +194,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
           ),
           Divider(),
-
-          // Navigation items
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -235,14 +231,72 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  // Method to handle page selection
   void _selectPage(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    // Close the drawer after selection
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     }
+  }
+}
+
+class NavigationRailDropdown extends StatefulWidget {
+  final Function(int) onItemSelected;
+
+  NavigationRailDropdown({required this.onItemSelected});
+
+  @override
+  _NavigationRailDropdownState createState() => _NavigationRailDropdownState();
+}
+
+class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
+  bool _isExpanded = false;
+
+  void _toggleDropdown() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          title: Text(
+            'User Management',
+            style: TextStyle(color: Colors.white),
+          ),
+          leading: Icon(Icons.people, color: Colors.white),
+          trailing: Icon(
+            _isExpanded ? Icons.expand_less : Icons.expand_more,
+            color: Colors.white,
+          ),
+          onTap: _toggleDropdown,
+        ),
+        if (_isExpanded) ...[
+          _buildDropdownMenuItem('View Users', Icons.person, 2),
+          _buildDropdownMenuItem('Add User', Icons.person_add, 3),
+          _buildDropdownMenuItem('User Roles', Icons.admin_panel_settings, 4),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildDropdownMenuItem(String title, IconData icon, int pageIndex) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.white),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+      ),
+      onTap: () {
+        widget.onItemSelected(pageIndex); // Trigger the page selection
+        setState(() {
+          _isExpanded = false; // Collapse dropdown after selection
+        });
+      },
+    );
   }
 }
