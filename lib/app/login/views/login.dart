@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../home/views/home.dart';
+
 class LoginViews extends StatefulWidget {
   const LoginViews({super.key});
 
@@ -55,7 +57,7 @@ class _LoginViewsState extends State<LoginViews> {
                         ),
                       ),
                     ),
-                    Gap(10),
+                    const Gap(10),
                     const Text("Email"),
                     const Gap(10),
                     TextFormField(
@@ -102,7 +104,7 @@ class _LoginViewsState extends State<LoginViews> {
                         ),
                       ),
                     ),
-                    Gap(20),
+                    const Gap(20),
                     Row(
                       children: [
                         Checkbox(
@@ -114,14 +116,14 @@ class _LoginViewsState extends State<LoginViews> {
                           },
                         ),
                         const Text("Remember me"),
-                        Spacer(),
+                        const Spacer(),
                         TextButton(
                           onPressed: () {},
-                          child: Text("Forget Passowrd?"),
+                          child: const Text("Forget Passowrd?"),
                         )
                       ],
                     ),
-                    Gap(20),
+                    const Gap(20),
                     Center(
                       child: ElevatedButton(
                         style: ButtonStyle(
@@ -140,17 +142,22 @@ class _LoginViewsState extends State<LoginViews> {
                           ),
                         ),
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           "Sign In",
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
                     ),
-                    Gap(10),
+                    const Gap(10),
                     Center(
                       child: TextButton(
-                        onPressed: () {},
-                        child: Text("Don't Have Any account sinUp?"),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => AdminDashboard()));
+                        },
+                        child: const Text("Don't Have Any account sinUp?"),
                       ),
                     )
                   ],
