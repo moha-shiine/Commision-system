@@ -145,6 +145,13 @@ class _LoginViewsState extends State<LoginViews> {
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
+                    ),
+                    Gap(10),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text("Don't Have Any account sinUp?"),
+                      ),
                     )
                   ],
                 ),
