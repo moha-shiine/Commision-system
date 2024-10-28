@@ -125,6 +125,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   index: 1,
                 ),
                 NavigationRailDropdown(
+                  isExpanded: isExpanded, // Pass the expanded state
                   onItemSelected: (int pageIndex) {
                     setState(() {
                       _selectedIndex = pageIndex;
@@ -243,19 +244,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
 class NavigationRailDropdown extends StatefulWidget {
   final Function(int) onItemSelected;
+  final bool isExpanded; // Accept the expanded state
 
-  NavigationRailDropdown({required this.onItemSelected});
+  NavigationRailDropdown(
+      {required this.onItemSelected, required this.isExpanded});
 
   @override
   _NavigationRailDropdownState createState() => _NavigationRailDropdownState();
 }
 
 class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
-  bool _isExpanded = false;
+  bool _isDropdownExpanded = false; // Local state for dropdown expansion
 
   void _toggleDropdown() {
     setState(() {
-      _isExpanded = !_isExpanded;
+      _isDropdownExpanded = !_isDropdownExpanded; // Toggle dropdown expansion
     });
   }
 
@@ -264,18 +267,21 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
     return Column(
       children: [
         ListTile(
-          title: Text(
-            'User Management',
-            style: TextStyle(color: Colors.white),
-          ),
+          title: widget.isExpanded
+              ? Text(
+                  'User Management',
+                  style: TextStyle(color: Colors.white),
+                )
+              : SizedBox(),
           leading: Icon(Icons.people, color: Colors.white),
           trailing: Icon(
-            _isExpanded ? Icons.expand_less : Icons.expand_more,
+            _isDropdownExpanded ? Icons.expand_less : Icons.expand_more,
             color: Colors.white,
           ),
           onTap: _toggleDropdown,
         ),
-        if (_isExpanded) ...[
+        // Show dropdown items only if the sidebar is expanded
+        if (_isDropdownExpanded) ...[
           _buildDropdownMenuItem('View Users', Icons.person, 2),
           _buildDropdownMenuItem('Add User', Icons.person_add, 3),
           _buildDropdownMenuItem('User Roles', Icons.admin_panel_settings, 4),
@@ -287,14 +293,16 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
   Widget _buildDropdownMenuItem(String title, IconData icon, int pageIndex) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.white),
-      ),
+      title: widget.isExpanded
+          ? Text(
+              title,
+              style: TextStyle(color: Colors.white),
+            )
+          : SizedBox(),
       onTap: () {
         widget.onItemSelected(pageIndex); // Trigger the page selection
         setState(() {
-          _isExpanded = false; // Collapse dropdown after selection
+          _isDropdownExpanded = false; // Collapse dropdown after selection
         });
       },
     );
