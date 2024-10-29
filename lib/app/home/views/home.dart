@@ -1,15 +1,7 @@
+import 'package:commision_system/app/dashboard/views/%20%20%20%20DashboardPage.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(AdminDashboardApp());
-
-class AdminDashboardApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AdminDashboard(),
-    );
-  }
-}
+//
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -21,11 +13,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
   bool isExpanded = true;
 
   final List<Widget> _pages = [
-    Center(child: Text("Dashboard")),
+    Center(child: DashboardPage()),
     Center(child: Text("Financial Data")),
     Center(child: Text("Transactions")),
     Center(child: Text("Reports")),
-    Center(child: Text("Product Data")),
+    Center(child: DashboardPage()),
   ];
 
   @override
@@ -274,10 +266,12 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
                 )
               : SizedBox(),
           leading: Icon(Icons.people, color: Colors.white),
-          trailing: Icon(
-            _isDropdownExpanded ? Icons.expand_less : Icons.expand_more,
-            color: Colors.white,
-          ),
+          trailing: widget.isExpanded
+              ? Icon(
+                  _isDropdownExpanded ? Icons.expand_less : Icons.expand_more,
+                  color: Colors.white,
+                )
+              : SizedBox(),
           onTap: _toggleDropdown,
         ),
         // Show dropdown items only if the sidebar is expanded
