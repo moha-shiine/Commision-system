@@ -1,5 +1,6 @@
 import 'package:commision_system/app/dashboard/views/%20%20%20%20DashboardPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 
 //
 
@@ -107,13 +108,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
             child: ListView(
               children: [
                 _buildNavigationRailDestination(
-                  icon: Icons.dashboard,
-                  label: 'Dashboard',
+                  icon: IconlyLight.home,
+                  label: 'Admin Dashboard',
                   index: 0,
                 ),
                 _buildNavigationRailDestination(
-                  icon: Icons.attach_money,
-                  label: 'Financial Data',
+                  icon: IconlyLight.category,
+                  label: 'Agency',
                   index: 1,
                 ),
                 NavigationRailDropdown(
@@ -125,12 +126,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   },
                 ),
                 _buildNavigationRailDestination(
-                  icon: Icons.report,
-                  label: 'Reports',
+                  icon: IconlyLight.infoSquare,
+                  label: 'Orders',
                   index: 3,
                 ),
                 _buildNavigationRailDestination(
-                  icon: Icons.category,
+                  icon: IconlyLight.bag,
                   label: 'Product Data',
                   index: 4,
                 ),
