@@ -200,13 +200,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget cardWidget(BuildContext context) {
     // Determine the cross-axis count based on screen width
-    int crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
+    int crossAxisCount = MediaQuery.of(context).size.width < 700 ? 2 : 4;
 
     return GridView.count(
       crossAxisCount: crossAxisCount,
       childAspectRatio: 2, // Adjust as needed
-      mainAxisSpacing: 16.0,
-      crossAxisSpacing: 16.0,
+      mainAxisSpacing: 1.0,
+      crossAxisSpacing: 1,
       shrinkWrap: true,
       physics:
           NeverScrollableScrollPhysics(), // Disable scroll if inside another scrollable
@@ -227,6 +227,8 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
+          height: 50,
+          width: 100,
           padding: EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
               color: color.withOpacity(0.2),
