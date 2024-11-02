@@ -31,93 +31,106 @@ class _DashboardPageState extends State<DashboardPage> {
             Gap(20),
             cardWidget(),
             Gap(20),
-            SizedBox(
-              height: 400,
-              child: LineChart(
-                LineChartData(
-                  lineTouchData: LineTouchData(),
-                  titlesData: FlTitlesData(
-                    rightTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(
-                      sideTitles:
-                          SideTitles(showTitles: true, reservedSize: 40),
-                    ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        getTitlesWidget: (value, meta) {
-                          // Define month labels for each index
-                          const monthNames = [
-                            'Jan',
-                            'Feb',
-                            'Mar',
-                            'Apr',
-                            'May',
-                            'Jun',
-                            'Jul',
-                            'Aug',
-                            'Sep',
-                            'Oct',
-                            'Nov',
-                            'Dec'
-                          ];
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Text(
+                    "Paid",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  Gap(10),
+                  SizedBox(
+                    height: 400,
+                    child: LineChart(
+                      LineChartData(
+                        lineTouchData: LineTouchData(),
+                        titlesData: FlTitlesData(
+                          rightTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          leftTitles: AxisTitles(
+                            sideTitles:
+                                SideTitles(showTitles: true, reservedSize: 40),
+                          ),
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              getTitlesWidget: (value, meta) {
+                                // Define month labels for each index
+                                const monthNames = [
+                                  'Jan',
+                                  'Feb',
+                                  'Mar',
+                                  'Apr',
+                                  'May',
+                                  'Jun',
+                                  'Jul',
+                                  'Aug',
+                                  'Sep',
+                                  'Oct',
+                                  'Nov',
+                                  'Dec'
+                                ];
 
-                          String monthLabel;
-                          if (value.toInt() >= 0 &&
-                              value.toInt() < monthNames.length) {
-                            monthLabel = monthNames[value.toInt()];
-                          } else {
-                            monthLabel =
-                                ''; // Blank for values outside the range
-                          }
+                                String monthLabel;
+                                if (value.toInt() >= 0 &&
+                                    value.toInt() < monthNames.length) {
+                                  monthLabel = monthNames[value.toInt()];
+                                } else {
+                                  monthLabel =
+                                      ''; // Blank for values outside the range
+                                }
 
-                          return SideTitleWidget(
-                            axisSide: meta.axisSide,
-                            child: Text(
-                              monthLabel,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 10),
+                                return SideTitleWidget(
+                                  axisSide: meta.axisSide,
+                                  child: Text(
+                                    monthLabel,
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 10),
+                                  ),
+                                );
+                              },
+                              interval: 1, // Show label at every month point
                             ),
-                          );
-                        },
-                        interval: 1, // Show label at every month point
+                          ),
+                        ),
+                        borderData: FlBorderData(show: true),
+                        gridData: FlGridData(show: true),
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: [
+                              FlSpot(0, 3),
+                              FlSpot(1, 2),
+                              FlSpot(2, 5),
+                              FlSpot(3, 3.1),
+                              FlSpot(4, 4),
+                              FlSpot(5, 3),
+                              FlSpot(6, 4),
+                              FlSpot(7, 3.5),
+                              FlSpot(8, 4.2),
+                              FlSpot(9, 3.8),
+                              FlSpot(10, 4.6),
+                              FlSpot(11, 4),
+                            ],
+                            isCurved: true,
+                            color: Colors.blue,
+                            // barWidth: 2,
+                            belowBarData: BarAreaData(
+                                show: true,
+                                color: Colors.blue.withOpacity(0.3)),
+                            dotData: FlDotData(show: false),
+                          ),
+                        ],
+                        minX: 0,
+                        maxX: 11,
+                        minY: 0,
+                        maxY: 6,
                       ),
                     ),
                   ),
-                  borderData: FlBorderData(show: true),
-                  gridData: FlGridData(show: true),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: [
-                        FlSpot(0, 3),
-                        FlSpot(1, 2),
-                        FlSpot(2, 5),
-                        FlSpot(3, 3.1),
-                        FlSpot(4, 4),
-                        FlSpot(5, 3),
-                        FlSpot(6, 4),
-                        FlSpot(7, 3.5),
-                        FlSpot(8, 4.2),
-                        FlSpot(9, 3.8),
-                        FlSpot(10, 4.6),
-                        FlSpot(11, 4),
-                      ],
-                      isCurved: true,
-                      color: Colors.blue,
-                      // barWidth: 2,
-                      belowBarData: BarAreaData(
-                          show: true, color: Colors.blue.withOpacity(0.3)),
-                      dotData: FlDotData(show: false),
-                    ),
-                  ],
-                  minX: 0,
-                  maxX: 11,
-                  minY: 0,
-                  maxY: 6,
-                ),
+                ],
               ),
             ),
             Gap(80),
