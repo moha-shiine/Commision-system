@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
+import 'app/home/views/home.dart';
 import 'app/login/views/login.dart';
 
 void main() {
@@ -11,10 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: LoginViews()
-        //AdminDashboard(),
-        );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:
+          //LoginViews()
+          AdminDashboard(),
+    );
   }
 }
 

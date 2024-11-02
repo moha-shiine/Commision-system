@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -16,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
@@ -26,7 +27,29 @@ class _DashboardPageState extends State<DashboardPage> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
-                      Icon(Icons.home),
+                      Icon(IconlyLight.home),
+                      Gap(50),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20, bottom: 20),
+                        child: VerticalDivider(),
+                      ),
+                      Gap(10),
+                      Icon(IconlyBold.home, color: Colors.blue),
+                      Gap(10),
+                      Text(
+                        "Paid",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      Gap(30),
+                      Icon(
+                        IconlyLight.paper,
+                        color: Colors.grey,
+                      ),
+                      Gap(10),
+                      Text(
+                        "UnPaid",
+                        style: TextStyle(color: Colors.grey),
+                      ),
                       Spacer(),
                       Text("Eng"),
                       Gap(10),
@@ -42,15 +65,16 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            Gap(20),
+            Gap(40),
             Text(
               "Dashboard ",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            Gap(20),
             cardWidget(),
             Gap(20),
             SizedBox(
-              height: 300,
+              height: 400,
               child: LineChart(
                 LineChartData(
                   lineTouchData: LineTouchData(),
@@ -137,7 +161,28 @@ class _DashboardPageState extends State<DashboardPage> {
                   maxY: 6,
                 ),
               ),
-            )
+            ),
+            Gap(80),
+            //  Spacer(),
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    Text("Pricvcy Policy"),
+                    Gap(10),
+                    Text("And Term Use"),
+                    Spacer(),
+                    Text("Adwaar Technolgy")
+                  ],
+                ),
+              ),
+            ),
+            Gap(20),
           ],
         ),
       ),
@@ -148,15 +193,18 @@ class _DashboardPageState extends State<DashboardPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _BuildCard("Agency", "1003", Icons.category, Colors.green),
-        _BuildCard("Orders", "303", Icons.send_and_archive, Colors.blue),
-        _BuildCard("Product", "10303", Icons.shop, Colors.pink),
-        _BuildCard("Commision", "103", Icons.price_change, Colors.amber),
+        _BuildCard("Agency", "1003", Icons.category, Colors.green, "Hide"),
+        _BuildCard(
+            "Orders", "303", Icons.send_and_archive, Colors.blue, "Hide"),
+        _BuildCard("Product", "10303", Icons.shop, Colors.pink, "Hide"),
+        _BuildCard(
+            "Commision", "103", Icons.price_change, Colors.amber, "Hide"),
       ],
     );
   }
 
-  Widget _BuildCard(String title, String value, IconData icon, Color color) {
+  Widget _BuildCard(
+      String title, String value, IconData icon, Color color, String Hide) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -169,12 +217,13 @@ class _DashboardPageState extends State<DashboardPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(20),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(icon),
                   Text(
-                    value,
+                    Hide,
                     style: const TextStyle(
                       fontSize: 22,
                     ),
@@ -183,10 +232,17 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               Gap(10),
               Text(
+                value,
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              Gap(10),
+              Text(
                 title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
               ),
               Gap(20),
+              // Spacer()
             ],
           ),
         ),

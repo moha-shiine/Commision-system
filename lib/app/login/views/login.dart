@@ -61,6 +61,7 @@ class _LoginViewsState extends State<LoginViews> {
                     const Text("Email"),
                     const Gap(10),
                     TextFormField(
+                      autofocus: true,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: "Enter email",
@@ -84,6 +85,7 @@ class _LoginViewsState extends State<LoginViews> {
                     const Text("password"),
                     const Gap(10),
                     TextFormField(
+                      autofocus: true,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
