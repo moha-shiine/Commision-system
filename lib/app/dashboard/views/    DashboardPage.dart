@@ -36,6 +36,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gap(20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
@@ -46,12 +47,33 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         Spacer(),
                         Text(
-                          "Paid",
-                          style: TextStyle(color: Colors.blue),
+                          "Sort by:",
+                          style: TextStyle(color: Colors.black),
                         ),
+                        Gap(5),
+                        Container(
+                          height: 25,
+                          width: 70,
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(4)),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "year",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              Icon(IconlyLight.arrowDown2, color: Colors.white)
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
+                  Divider(),
                   Gap(30),
                   SizedBox(
                     height: 400,
@@ -65,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               sideTitles: SideTitles(showTitles: false)),
                           leftTitles: AxisTitles(
                             sideTitles:
-                                SideTitles(showTitles: true, reservedSize: 40),
+                                SideTitles(showTitles: true, reservedSize: 30),
                           ),
                           bottomTitles: AxisTitles(
                             sideTitles: SideTitles(
@@ -143,6 +165,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                   ),
+                  Gap(10)
                 ],
               ),
             ),
