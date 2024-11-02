@@ -34,12 +34,25 @@ class _DashboardPageState extends State<DashboardPage> {
             Container(
               color: Colors.white,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Paid",
-                    style: TextStyle(color: Colors.blue),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Users",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        Spacer(),
+                        Text(
+                          "Paid",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ],
+                    ),
                   ),
-                  Gap(10),
+                  Gap(30),
                   SizedBox(
                     height: 400,
                     child: LineChart(
