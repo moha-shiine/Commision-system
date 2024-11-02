@@ -200,71 +200,67 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget cardWidget(BuildContext context) {
     // Determine the cross-axis count based on screen width
-    int crossAxisCount = MediaQuery.of(context).size.width < 700 ? 2 : 4;
+    int crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
 
-    return GridView.count(
-      crossAxisCount: crossAxisCount,
-      childAspectRatio: 2, // Adjust as needed
-      mainAxisSpacing: 1.0,
-      crossAxisSpacing: 1,
-      shrinkWrap: true,
-      physics:
-          NeverScrollableScrollPhysics(), // Disable scroll if inside another scrollable
-      children: [
-        _BuildCard("Agency", "1003", Icons.category, Colors.green, "Hide"),
-        _BuildCard(
-            "Orders", "303", Icons.send_and_archive, Colors.blue, "Hide"),
-        _BuildCard("Product", "10303", Icons.shop, Colors.pink, "Hide"),
-        _BuildCard(
-            "Commission", "103", Icons.price_change, Colors.amber, "Hide"),
-      ],
+    return SingleChildScrollView(
+      child: GridView.count(
+        crossAxisCount: crossAxisCount,
+        childAspectRatio: 2.1, // Adjust as needed
+        mainAxisSpacing: 5.0,
+        crossAxisSpacing: 5,
+        shrinkWrap: true,
+        physics:
+            NeverScrollableScrollPhysics(), // Disable scroll if inside another scrollable
+        children: [
+          _BuildCard("Agency", "1003", Icons.category, Colors.green, "Hide"),
+          _BuildCard(
+              "Orders", "303", Icons.send_and_archive, Colors.blue, "Hide"),
+          _BuildCard("Product", "10303", Icons.shop, Colors.pink, "Hide"),
+          _BuildCard(
+              "Commission", "103", Icons.price_change, Colors.amber, "Hide"),
+        ],
+      ),
     );
   }
 
   Widget _BuildCard(
       String title, String value, IconData icon, Color color, String Hide) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          height: 50,
-          width: 100,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(16)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gap(20),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+            color: color.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(16)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gap(4),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(icon),
-                  Text(
-                    Hide,
-                    style: const TextStyle(
-                      fontSize: 22,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(icon),
+                Text(
+                  Hide,
+                  style: const TextStyle(
+                    fontSize: 22,
                   ),
-                ],
-              ),
-              Gap(10),
-              Text(
-                value,
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Gap(10),
-              Text(
-                title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-              ),
-              Gap(20),
-              // Spacer()
-            ],
-          ),
+                ),
+              ],
+            ),
+            Gap(6),
+            Text(
+              value,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            Gap(10),
+            Text(
+              title,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+            ),
+            //  Gap(20),
+            // Spacer()
+          ],
         ),
       ),
     );
