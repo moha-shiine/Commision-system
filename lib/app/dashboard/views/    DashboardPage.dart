@@ -20,50 +20,8 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              child: Container(
-                height: 80,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Icon(IconlyLight.home),
-                      Gap(50),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20, bottom: 20),
-                        child: VerticalDivider(),
-                      ),
-                      Gap(10),
-                      Icon(IconlyBold.home, color: Colors.blue),
-                      Gap(10),
-                      Text(
-                        "Paid",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      Gap(30),
-                      Icon(
-                        IconlyLight.paper,
-                        color: Colors.grey,
-                      ),
-                      Gap(10),
-                      Text(
-                        "UnPaid",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Text("Eng"),
-                      Gap(10),
-                      Icon(Icons.notification_add),
-                      Gap(10),
-                      Text("shiine"),
-                      Gap(30),
-                      CircleAvatar(
-                          maxRadius: 30,
-                          child: Center(child: Icon(Icons.person)))
-                    ],
-                  ),
-                ),
-              ),
+            headerCard(
+              titel: "Home",
             ),
             Gap(40),
             Text(
@@ -243,6 +201,66 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               Gap(20),
               // Spacer()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class headerCard extends StatelessWidget {
+  final String? titel;
+  const headerCard({
+    super.key,
+    required this.titel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        height: 80,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              const Icon(IconlyLight.home),
+              Text(
+                titel!,
+                style: const TextStyle(color: Colors.blue),
+              ),
+              const Gap(50),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 20),
+                child: VerticalDivider(),
+              ),
+              const Gap(10),
+              const Icon(IconlyBold.home, color: Colors.blue),
+              const Gap(10),
+              const Text(
+                "Paid",
+                style: TextStyle(color: Colors.blue),
+              ),
+              const Gap(30),
+              const Icon(
+                IconlyLight.paper,
+                color: Colors.grey,
+              ),
+              const Gap(10),
+              const Text(
+                "UnPaid",
+                style: TextStyle(color: Colors.grey),
+              ),
+              const Spacer(),
+              const Text("Eng"),
+              const Gap(10),
+              const Icon(Icons.notification_add),
+              const Gap(10),
+              const Text("shiine"),
+              const Gap(30),
+              const CircleAvatar(
+                  maxRadius: 30, child: Center(child: Icon(Icons.person)))
             ],
           ),
         ),
