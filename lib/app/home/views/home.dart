@@ -1,6 +1,8 @@
+import 'package:commision_system/app/agency/view/agentView.dart';
 import 'package:commision_system/app/dashboard/views/%20%20%20%20DashboardPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:gap/gap.dart';
 
 //
 
@@ -15,7 +17,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   final List<Widget> _pages = [
     Center(child: DashboardPage()),
-    Center(child: Text("Financial Data")),
+    AgentView(),
     Center(child: Text("Transactions")),
     Center(child: Text("Reports")),
     Center(child: DashboardPage()),
@@ -79,7 +81,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Widget _buildSidebar() {
     return Container(
       width: isExpanded ? 250 : 100,
-      color: Colors.black87,
+      color: Colors.white,
       child: Column(
         children: [
           Padding(
@@ -97,7 +99,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   Expanded(
                     child: Text(
                       "Nakapin",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
                     ),
                   ),
               ],
@@ -151,11 +153,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
     final isSelected = _selectedIndex == index;
 
     return ListTile(
-      leading: Icon(icon, color: isSelected ? Colors.blue : Colors.white),
+      leading: Icon(icon, color: isSelected ? Colors.blue : Colors.black),
       title: isExpanded
           ? Text(
               label,
-              style: TextStyle(color: isSelected ? Colors.blue : Colors.white),
+              style: TextStyle(color: isSelected ? Colors.blue : Colors.black),
             )
           : null,
       onTap: () {
@@ -197,21 +199,25 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   title: Text('Home'),
                   onTap: () => _selectPage(0),
                 ),
+                Gap(10),
                 ListTile(
                   leading: Icon(Icons.attach_money),
                   title: Text('Financial Data'),
                   onTap: () => _selectPage(1),
                 ),
+                Gap(10),
                 ListTile(
                   leading: Icon(Icons.swap_horiz),
                   title: Text('Transactions'),
                   onTap: () => _selectPage(2),
                 ),
+                Gap(10),
                 ListTile(
                   leading: Icon(Icons.report),
                   title: Text('Reports'),
                   onTap: () => _selectPage(3),
                 ),
+                Gap(10),
                 ListTile(
                   leading: Icon(Icons.category),
                   title: Text('Product Data'),
@@ -263,14 +269,14 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
           title: widget.isExpanded
               ? Text(
                   'User Management',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 )
               : SizedBox(),
-          leading: Icon(Icons.people, color: Colors.white),
+          leading: Icon(Icons.people, color: Colors.black),
           trailing: widget.isExpanded
               ? Icon(
                   _isDropdownExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: Colors.white,
+                  color: Colors.black,
                 )
               : SizedBox(),
           onTap: _toggleDropdown,
@@ -279,7 +285,7 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
         if (_isDropdownExpanded) ...[
           _buildDropdownMenuItem('View Users', Icons.person, 2),
           _buildDropdownMenuItem('Add User', Icons.person_add, 3),
-          _buildDropdownMenuItem('User Roles', Icons.admin_panel_settings, 4),
+          _buildDropdownMenuItem('User Roles', IconlyLight.user2, 4),
         ],
       ],
     );
@@ -287,11 +293,11 @@ class _NavigationRailDropdownState extends State<NavigationRailDropdown> {
 
   Widget _buildDropdownMenuItem(String title, IconData icon, int pageIndex) {
     return ListTile(
-      leading: Icon(icon, color: Colors.white),
+      leading: Icon(icon, color: Colors.blue),
       title: widget.isExpanded
           ? Text(
               title,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.blue),
             )
           : SizedBox(),
       onTap: () {
