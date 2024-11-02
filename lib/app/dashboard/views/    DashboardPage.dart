@@ -226,9 +226,10 @@ class headerCard extends StatelessWidget {
           child: Row(
             children: [
               const Icon(IconlyLight.home),
+              Gap(10),
               Text(
                 titel!,
-                style: const TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.black),
               ),
               const Gap(50),
               const Padding(
